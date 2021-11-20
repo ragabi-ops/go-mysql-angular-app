@@ -24,6 +24,8 @@ jobs:
       packages: write
 
     steps:
+      - name: test echo
+        run: ls -a && echo $PWD
       - name: Checkout repository
         uses: actions/checkout@v2
 
