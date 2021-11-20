@@ -13,14 +13,14 @@ env:
   IMAGE_NAME: ${{ github.repository }}
 
 jobs:
-  build-deploy:
+  build-and-push-image:
     strategy:
       matrix:
         include:
           - context: 'docker/database/Dockerfile'
-            custom-tag: 'mysql-go-app-latest'
+            image_name: 'mysql-go-app'
           - context: 'docker/webserver/Dockerfile'
-            custom-tag: 'go-server-app-latest'
+            image_name: 'go-server-app'
     runs-on: ubuntu-latest
     permissions:
       contents: read
@@ -45,11 +45,11 @@ jobs:
         id: meta
         uses: docker/metadata-action@v3.6.0
         with:
-          images: ${{ env.REGISTRY }}
+          images: ${{ env.REGISTRY }}/ragabi-ops/${{ matrix.image_name }}
           tags: |
-            type=sha,
-            type=raw,${{ matrix.custom-tag }}
-          
+            type=sha
+            type=raw,value=latest
+
       - name: Build and push Docker image
         uses: docker/build-push-action@v2.7.0
         with:
