@@ -16,10 +16,9 @@ jobs:
   build-and-push-image:
     strategy:
       matrix:
-        os: ['ubuntu-latest', 'ubuntu-latest']
         context: ['docker/database/Dockerfile', 'docker/webserver/Dockerfile']
         prefix-tags: ['mysql-go-app' ,'go-server-app']
-    runs-on: ${{ matrix.os }}
+    runs-on: ubuntu-latest
     permissions:
       contents: read
       packages: write
