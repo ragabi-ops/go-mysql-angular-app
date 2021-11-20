@@ -1,8 +1,12 @@
 name: Create and publish a Docker image
 
 on:
+  push:
+    branches:
+      ['master']
   pull_request:
     branches: ['master']
+  
 
 env:
   REGISTRY: ghcr.io
@@ -10,6 +14,10 @@ env:
 
 jobs:
   build-and-push-image:
+    strategy:
+      mastrix:
+        context: ['docker/database/Dockerfile', 'docker/webserver/Dockerfile']
+        prefix_tags: ['mysql-go-db' ,'golang-app']
     runs-on: ubuntu-latest
     permissions:
       contents: read
@@ -32,7 +40,8 @@ jobs:
         with:
           images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
           tags: |
-            type=sha
+            type=sha,
+            type=raw,${{prefix_tags}}
           
           
       - name: TEST
@@ -42,6 +51,6 @@ jobs:
 #         uses: docker/build-push-action@ad44023a93711e3deb337508980b4b5e9bcdc5dc
 #         with:
 #           context: .
-#           push: true
+#           push: ${{ github.event_name != 'pull_request' }}
 #           tags: ${{ steps.meta.outputs.tags }}
 #           labels: ${{ steps.meta.outputs.labels }}
