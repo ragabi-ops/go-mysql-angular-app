@@ -16,9 +16,10 @@ jobs:
   build-and-push-image:
     strategy:
       matrix:
-        # context: ['docker/database/Dockerfile', 'docker/webserver/Dockerfile']
-        prefix-tags: ['mysql-go-db' ,'golang-app']
-    runs-on: ubuntu-latest
+        os: ['ubuntu-latest', 'ubuntu-latest']
+        context: ['docker/database/Dockerfile', 'docker/webserver/Dockerfile']
+        prefix-tags: ['mysql-go-app' ,'go-server-app']
+    runs-on: ${{ matrix.os }}
     permissions:
       contents: read
       packages: write
@@ -40,7 +41,7 @@ jobs:
         id: meta
         uses: docker/metadata-action@98669ae865ea3cffbcbaa878cf57c20bbf1c6c38
         with:
-          images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
+          images: ${{ env.REGISTRY }}
           tags: |
             type=sha,
             type=raw,${{ matrix.prefix-tags }}
