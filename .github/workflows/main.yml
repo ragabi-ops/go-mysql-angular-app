@@ -46,9 +46,7 @@ jobs:
         uses: docker/metadata-action@v3.6.0
         with:
           images: ${{ env.REGISTRY }}/ragabi-ops/${{ matrix.image_name }}
-          flavor: |
-            latest=true
-          tag: |
+          tags: |
             type=sha
             type=row,value=latest
 
