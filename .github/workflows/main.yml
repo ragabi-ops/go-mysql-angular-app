@@ -45,7 +45,7 @@ jobs:
         id: meta
         uses: docker/metadata-action@v3.6.0
         with:
-          images: ${{ env.REGISTRY }}
+          images: ${{ env.REGISTRY }}/
           tags: |
             type=sha,
             type=raw,${{ matrix.custom-tag }}
@@ -55,6 +55,6 @@ jobs:
         with:
           context: .
           file: ${{ matrix.context }}
-          push: ${{ github.event_name == 'pull_request' }}
+          push: ${{ github.event_name == 'pull_request' || github.event_name == "push" }}
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
