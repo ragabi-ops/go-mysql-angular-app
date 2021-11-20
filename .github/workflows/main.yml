@@ -18,9 +18,9 @@ jobs:
       matrix:
         include:
           - context: 'docker/database/Dockerfile'
-            custom-tag: 'mysql-go-app'
+            image_name: 'mysql-go-app'
           - context: 'docker/webserver/Dockerfile'
-            custom-tag: 'go-server-app'
+            image_name: 'go-server-app'
     runs-on: ubuntu-latest
     permissions:
       contents: read
@@ -45,10 +45,7 @@ jobs:
         id: meta
         uses: docker/metadata-action@v3.6.0
         with:
-          images: ${{ env.REGISTRY }}/${{ matrix.custom-tag }}
-          tags: |
-            type=ref,event=tag
-            type=sha
+          images: ${{ env.REGISTRY }}/${{ matrix.image_name }}
           
       - name: Build and push Docker image
         uses: docker/build-push-action@v2.7.0
