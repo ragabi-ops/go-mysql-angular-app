@@ -41,7 +41,7 @@ jobs:
           images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
           tags: |
             type=sha,
-            type=raw,${{prefix_tags}}
+            type=raw,${{matrix.prefix_tags}}
           
           
       - name: TEST
