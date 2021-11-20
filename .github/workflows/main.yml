@@ -45,8 +45,10 @@ jobs:
         id: meta
         uses: docker/metadata-action@v3.6.0
         with:
-          images: ${{ env.REGISTRY }}/${{ matrix.image_name }}
-          
+          images: ${{ env.REGISTRY }}/ragabi-ops/${{ matrix.image_name }}
+          tasg: |
+            type=sha
+
       - name: Build and push Docker image
         uses: docker/build-push-action@v2.7.0
         with:
