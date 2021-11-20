@@ -1,0 +1,21 @@
+version: '3.9'
+services:
+  mysql-server: 
+    build:
+      context: .
+      dockerfile: docker/database/Dockerfile
+    volumes: 
+      - mysql-data:/data
+
+  web-server:
+    ports:
+     - "8080:8080"
+    build:
+      context: .
+      dockerfile: docker/webserver/Dockerfile
+    depends_on:
+      - "mysql-server"
+
+volumes:
+  mysql-data:
+
