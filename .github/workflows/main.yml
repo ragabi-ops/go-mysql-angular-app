@@ -15,7 +15,7 @@ env:
 jobs:
   build-and-push-image:
     strategy:
-      mastrix:
+      matrix:
         context: ['docker/database/Dockerfile', 'docker/webserver/Dockerfile']
         prefix_tags: ['mysql-go-db' ,'golang-app']
     runs-on: ubuntu-latest
