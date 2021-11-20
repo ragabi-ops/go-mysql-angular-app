@@ -13,7 +13,7 @@ env:
   IMAGE_NAME: ${{ github.repository }}
 
 jobs:
-  build-deploy:
+  build-and-push-image:
     strategy:
       matrix:
         include:
@@ -51,7 +51,7 @@ jobs:
             type=raw,${{ matrix.custom-tag }}
           
       - name: Build and push Docker image
-        uses: docker/build-push-action@v2
+        uses: docker/build-push-action@v2.7.0
         with:
           context: .
           file: ${{ matrix.context }}
