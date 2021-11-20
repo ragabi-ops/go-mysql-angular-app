@@ -17,9 +17,9 @@ jobs:
     strategy:
       matrix:
         include:
-          - context: '/docker/database/Dockerfile'
+          - context: '/docker/database/.'
             custom-tag: 'mysql-go-app-latest'
-          - context: 'docker/webserver/Dockerfile'
+          - context: 'docker/webserver/.'
             custom-tag: 'go-server-app-latest'
     runs-on: ubuntu-latest
     permissions:
