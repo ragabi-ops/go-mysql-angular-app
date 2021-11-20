@@ -48,7 +48,7 @@ jobs:
           images: ${{ env.REGISTRY }}/ragabi-ops/${{ matrix.image_name }}
           tags: |
             type=sha
-            type=row,value=latest
+            type=raw,value=latest
 
       - name: Build and push Docker image
         uses: docker/build-push-action@v2.7.0
