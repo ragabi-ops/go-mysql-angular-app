@@ -46,8 +46,9 @@ jobs:
         uses: docker/metadata-action@v3.6.0
         with:
           images: ${{ env.REGISTRY }}/ragabi-ops/${{ matrix.image_name }}
-          tasg: |
+          tag: |
             type=sha
+            type=row,value=latest
 
       - name: Build and push Docker image
         uses: docker/build-push-action@v2.7.0
