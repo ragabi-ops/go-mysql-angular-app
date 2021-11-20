@@ -17,7 +17,7 @@ jobs:
     strategy:
       matrix:
         context: ['docker/database/Dockerfile', 'docker/webserver/Dockerfile']
-        prefix_tags: ['mysql-go-db' ,'golang-app']
+        prefix-tags: ['mysql-go-db' ,'golang-app']
     runs-on: ubuntu-latest
     permissions:
       contents: read
