@@ -45,10 +45,9 @@ jobs:
         id: meta
         uses: docker/metadata-action@v3.6.0
         with:
-          images: ${{ env.REGISTRY }}/
+          images: ${{ env.REGISTRY }}/${{ matrix.custom-tag }}
           tags: |
             type=sha,
-            type=raw,${{ matrix.custom-tag }}
           
       - name: Build and push Docker image
         uses: docker/build-push-action@v2.7.0
