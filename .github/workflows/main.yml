@@ -13,19 +13,21 @@ env:
   IMAGE_NAME: ${{ github.repository }}
 
 jobs:
-  build-and-push-image:
+  build-deploy:
     strategy:
       matrix:
-        context: ['docker/database/Dockerfile', 'docker/webserver/Dockerfile']
-        prefix-tags: ['mysql-go-app' ,'go-server-app']
+        include:
+          - context: '/docker/database/Dockerfile'
+            custom-tag: 'mysql-go-app'
+          - context: 'docker/webserver/Dockerfile'
+            custom-tag: 'go-server-app'
     runs-on: ubuntu-latest
     permissions:
       contents: read
       packages: write
 
     steps:
-      - name: test echo
-        run: ls -a && echo $PWD
+
       - name: Checkout repository
         uses: actions/checkout@v2
 
