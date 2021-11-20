@@ -28,7 +28,7 @@ jobs:
 
     steps:
       - name: Test
-        run: ls */*/*/
+        run: ls *
 
       # - name: Checkout repository
       #   uses: actions/checkout@v2
