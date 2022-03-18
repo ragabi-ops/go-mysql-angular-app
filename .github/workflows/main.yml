@@ -1,4 +1,4 @@
-name: Build Images And Deploy Images 
+name: Build Images And Deploy Images
 
 on:
   push:
@@ -6,7 +6,6 @@ on:
       ['master']
   pull_request:
     branches: ['master']
-  
 
 env:
   REGISTRY: ghcr.io
